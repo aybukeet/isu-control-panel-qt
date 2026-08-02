@@ -8,6 +8,11 @@ Rectangle {
 
     property string title: "ISU"
 
+    property bool connected: false
+    property bool powered: false
+    property bool killed: false
+    property string switchState: "OFF"
+
     radius: 10
 
     color: "#2A2F36"
@@ -21,19 +26,14 @@ Rectangle {
         anchors.margins: 18
         spacing: 14
 
-        // HEADER
         RowLayout {
 
             Layout.fillWidth: true
 
             Label {
-
                 text: root.title
-
                 color: "white"
-
                 font.pixelSize: 22
-
                 font.bold: true
             }
 
@@ -42,126 +42,169 @@ Rectangle {
             }
 
             StatusLed {
-
-                status: "Offline"
+                status: root.connected ? "Ready" : "Offline"
             }
 
         }
 
-        Rectangle{
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#404854"
+        }
+
+        RowLayout {
 
             Layout.fillWidth: true
-            height:1
 
-            color:"#404854"
-        }
-
-        // POWER
-
-        RowLayout{
-
-            spacing:8
-
-            Label{
-
-                text:"⚡"
-
-                font.pixelSize:18
+            Label {
+                text: "⚡"
+                font.pixelSize: 18
             }
 
-            Label{
-
-                text:"Power"
-
-                color:"#D6D6D6"
-
-                font.bold:true
+            Label {
+                text: "Power"
+                color: "#D6D6D6"
+                font.bold: true
             }
 
-            Item{
-                Layout.fillWidth:true
+            Item {
+                Layout.fillWidth: true
             }
 
-            Label{
-
-                text:"OFF"
-
-                color:"#F44336"
-
-                font.bold:true
+            Label {
+                text: root.powered ? "ON" : "OFF"
+                color: root.powered ? "#4CAF50" : "#F44336"
+                font.bold: true
             }
 
         }
 
-        // MODE
+        ColumnLayout {
 
-        ColumnLayout{
+            Layout.fillWidth: true
 
-            spacing:5
+            spacing: 5
 
-            Label{
-
-                text:"Mode"
-
-                color:"#D6D6D6"
-
-                font.bold:true
+            Label {
+                text: "Mode"
+                color: "#D6D6D6"
+                font.bold: true
             }
 
-            ComboBox{
+            ComboBox {
 
-                Layout.fillWidth:true
+                Layout.fillWidth: true
 
-                model:[
+                model: [
                     "Normal",
                     "Test",
                     "Maintenance"
                 ]
+
             }
 
         }
 
-        // BUTTONS
+        RowLayout {
 
-        RowLayout{
+            Layout.fillWidth: true
 
-            Layout.fillWidth:true
+            spacing: 8
 
-            spacing:8
+            Button {
 
-            Button{
+                Layout.fillWidth: true
 
-                Layout.fillWidth:true
+                text: "🔌 Connect"
 
-                text:"🔌 Connect"
+                enabled: !root.connected && !root.killed
+
+                onClicked: {
+
+                    root.connected = true
+
+                }
+
             }
 
-            Button{
+            Button {
 
-                Layout.fillWidth:true
+                Layout.fillWidth: true
 
-                text:"⛔ Disconnect"
+                text: "⛔ Disconnect"
+
+                enabled: root.connected && !root.killed
+
+                onClicked: {
+
+                    root.connected = false
+                    root.powered = false
+
+                }
+
             }
 
-            Button{
+            Button {
 
-                Layout.fillWidth:true
+                Layout.fillWidth: true
 
-                text:"⚡ Power"
+                text: "⚡ Power"
+
+                enabled: root.connected && !root.killed
+
+                onClicked: {
+
+                    root.powered = !root.powered
+
+                }
+
             }
 
         }
 
-        ThreeStateSwitch{
+        ThreeStateSwitch {
 
-            Layout.fillWidth:true
+            Layout.fillWidth: true
+
+            state: root.switchState
+
+            onStateChanged: {
+
+                root.switchState = state
+
+                if(state === "KILL") {
+
+                    root.killed = true
+                    root.connected = false
+                    root.powered = false
+
+                } else {
+
+                    root.killed = false
+
+                }
+
+            }
 
         }
 
-        Item{
+        Label {
 
-            Layout.fillHeight:true
+            visible: root.killed
 
+            text: "⚠ EMERGENCY STOP ACTIVE"
+
+            color: "#FF5252"
+
+            font.bold: true
+
+            Layout.alignment: Qt.AlignHCenter
+
+        }
+
+        Item {
+            Layout.fillHeight: true
         }
 
     }

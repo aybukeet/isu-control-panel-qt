@@ -4,6 +4,10 @@ import QtQuick.Layouts 1.15
 
 GroupBox {
 
+    id: root
+
+    property string state: "OFF"
+
     title: "Switch"
 
     Layout.fillWidth: true
@@ -33,46 +37,105 @@ GroupBox {
         spacing: 18
 
         RadioButton {
+
             text: "OFF"
-            checked: true
+
+            checked: root.state === "OFF"
+            enabled: root.state !== "KILL"
+
             ButtonGroup.group: switchGroup
 
-            contentItem: Text {
-                text: parent.text
-                color: "white"
-                font.bold: true
-                font.pixelSize: 13
-                verticalAlignment: Text.AlignVCenter
-                leftPadding: parent.indicator.width + parent.spacing
+            onClicked: {
+
+                if(root.state !== "KILL")
+                    root.state = "OFF"
+
             }
+
+            contentItem: Text {
+
+                text: parent.text
+
+                color: "white"
+
+                font.bold: true
+
+                font.pixelSize: 13
+
+                verticalAlignment: Text.AlignVCenter
+
+                leftPadding: parent.indicator.width + parent.spacing
+
+            }
+
         }
 
         RadioButton {
+
             text: "ON"
+
+            checked: root.state === "ON"
+            enabled: root.state !== "KILL"
+
             ButtonGroup.group: switchGroup
 
-            contentItem: Text {
-                text: parent.text
-                color: "white"
-                font.bold: true
-                font.pixelSize: 13
-                verticalAlignment: Text.AlignVCenter
-                leftPadding: parent.indicator.width + parent.spacing
+            onClicked: {
+
+                if(root.state !== "KILL")
+                    root.state = "ON"
+
             }
+
+            contentItem: Text {
+
+                text: parent.text
+
+                color: "white"
+
+                font.bold: true
+
+                font.pixelSize: 13
+
+                verticalAlignment: Text.AlignVCenter
+
+                leftPadding: parent.indicator.width + parent.spacing
+
+            }
+
         }
 
         RadioButton {
+
             text: "KILL"
+
+            checked: root.state === "KILL"
+
             ButtonGroup.group: switchGroup
 
-            contentItem: Text {
-                text: parent.text
-                color: "#FF5252"   // KILL kırmızı olsun
-                font.bold: true
-                font.pixelSize: 13
-                verticalAlignment: Text.AlignVCenter
-                leftPadding: parent.indicator.width + parent.spacing
+            onClicked: {
+
+                root.state = "KILL"
+
             }
+
+            contentItem: Text {
+
+                text: parent.text
+
+                color: "#FF5252"
+
+                font.bold: true
+
+                font.pixelSize: 13
+
+                verticalAlignment: Text.AlignVCenter
+
+                leftPadding: parent.indicator.width + parent.spacing
+
+            }
+
         }
+
     }
+
 }
