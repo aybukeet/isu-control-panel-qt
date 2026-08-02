@@ -11,6 +11,7 @@ GroupBox {
     title: "Switch"
 
     Layout.fillWidth: true
+    Layout.preferredHeight: 85
 
     background: Rectangle {
         color: "#252A33"
@@ -23,6 +24,7 @@ GroupBox {
         text: parent.title
         color: "#D6D6D6"
         font.bold: true
+        padding: 0
     }
 
     ButtonGroup {
@@ -32,9 +34,9 @@ GroupBox {
     RowLayout {
 
         anchors.fill: parent
-        anchors.margins: 10
+        anchors.margins: 6
 
-        spacing: 18
+        spacing: 10
 
         RadioButton {
 

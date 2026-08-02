@@ -13,6 +13,8 @@ Rectangle {
     property bool killed: false
     property string switchState: "OFF"
 
+    signal logRequested(string level, string message)
+
     radius: 10
 
     color: "#2A2F36"
@@ -124,6 +126,8 @@ Rectangle {
 
                     root.connected = true
 
+                    logRequested("INFO", root.title + " Connected")
+
                 }
 
             }
@@ -141,6 +145,8 @@ Rectangle {
                     root.connected = false
                     root.powered = false
 
+                    logRequested("INFO", root.title + " Disconnected")
+
                 }
 
             }
@@ -157,8 +163,12 @@ Rectangle {
 
                     root.powered = !root.powered
 
-                }
+                    logRequested(
+                        "INFO",
+                        root.title + (root.powered ? " Power ON" : " Power OFF")
+                    )
 
+                }
             }
 
         }
@@ -173,11 +183,16 @@ Rectangle {
 
                 root.switchState = state
 
-                if(state === "KILL") {
+                if (state === "KILL") {
 
                     root.killed = true
                     root.connected = false
                     root.powered = false
+
+                    logRequested(
+                        "WARNING",
+                        root.title + " Emergency Stop Activated"
+                    )
 
                 } else {
 

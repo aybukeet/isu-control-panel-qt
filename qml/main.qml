@@ -6,7 +6,12 @@ import "components"
 
 ApplicationWindow {
 
+
     id: window
+
+    ListModel {
+        id: logModel
+    }
 
     visible: true
 
@@ -17,6 +22,7 @@ ApplicationWindow {
     minimumHeight: 700
 
     title: "ISU Control Panel"
+
 
     Rectangle {
 
@@ -41,7 +47,7 @@ ApplicationWindow {
             GridLayout {
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.preferredHeight: 650
 
                 columns: 2
 
@@ -51,38 +57,90 @@ ApplicationWindow {
                 ISUPanel {
 
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
+                    Layout.preferredHeight: 320
 
                     title: "ISU A-1"
 
+                    onLogRequested: {
+
+                        var t = Qt.formatTime(new Date(), "HH:mm:ss")
+
+                        logModel.append({
+                            "time": t,
+                            "level": level,
+                            "message": message
+                        })
+                    }
+
                 }
 
                 ISUPanel {
 
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
+                    Layout.preferredHeight: 320
 
                     title: "ISU A-2"
 
+                    onLogRequested: {
+
+                        var t = Qt.formatTime(new Date(), "HH:mm:ss")
+
+                        logModel.append({
+                            "time": t,
+                            "level": level,
+                            "message": message
+                        })
+                    }
+
                 }
 
                 ISUPanel {
 
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
+                    Layout.preferredHeight: 320
 
                     title: "ISU B-1"
 
+                    onLogRequested: {
+
+                        var t = Qt.formatTime(new Date(), "HH:mm:ss")
+
+                        logModel.append({
+                            "time": t,
+                            "level": level,
+                            "message": message
+                        })
+                    }
+
                 }
 
                 ISUPanel {
 
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
+                    Layout.preferredHeight: 320
 
                     title: "ISU B-2"
 
+                    onLogRequested: {
+
+                        var t = Qt.formatTime(new Date(), "HH:mm:ss")
+
+                        logModel.append({
+                            "time": t,
+                            "level": level,
+                            "message": message
+                        })
+                    }
+
                 }
+
+            }
+
+            SystemLog {
+
+                Layout.fillWidth: true
+
+                model: logModel
 
             }
 

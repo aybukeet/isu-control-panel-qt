@@ -5,5 +5,6 @@
         <file>qml/components/StatusLed.qml</file>
         <file>qml/components/ThreeStateSwitch.qml</file>
         <file>qml/components/ISUPanel.qml</file>
+        <file>qml/components/SystemLog.qml</file>
     </qresource>
 </RCC>
