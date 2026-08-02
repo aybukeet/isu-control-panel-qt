@@ -5,38 +5,37 @@ import QtQuick.Layouts 1.15
 import "components"
 
 ApplicationWindow {
-    id: root
+
+    id: window
 
     visible: true
+
     width: 1400
     height: 900
+
+    minimumWidth: 1200
+    minimumHeight: 700
 
     title: "ISU Control Panel"
 
     Rectangle {
+
         anchors.fill: parent
-        color: "#1B1D21"
+
+        color: "#1B1F24"
 
         ColumnLayout {
+
             anchors.fill: parent
-            anchors.margins: 20
-            spacing: 20
+
+            anchors.margins: 15
+
+            spacing: 15
 
             Header {
-                Layout.fillWidth: true
-            }
-
-            TabBar {
 
                 Layout.fillWidth: true
 
-                TabButton {
-                    text: "Yazılım Yükleme"
-                }
-
-                TabButton {
-                    text: "Veri Görüntüleme"
-                }
             }
 
             GridLayout {
@@ -46,32 +45,63 @@ ApplicationWindow {
 
                 columns: 2
 
-                rowSpacing: 20
-                columnSpacing: 20
+                rowSpacing: 15
+                columnSpacing: 15
 
                 ISUPanel {
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
                     title: "ISU A-1"
+
                 }
 
                 ISUPanel {
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
                     title: "ISU A-2"
+
                 }
 
                 ISUPanel {
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
                     title: "ISU B-1"
+
                 }
 
                 ISUPanel {
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
                     title: "ISU B-2"
+
                 }
+
+            }
+
+            TabBar {
+
+                Layout.fillWidth: true
+
+                TabButton {
+
+                    text: "Yazılım Yükleme"
+
+                }
+
+                TabButton {
+
+                    text: "Veri Görüntüleme"
+
+                }
+
             }
 
         }

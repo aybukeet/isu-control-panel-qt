@@ -3,9 +3,6 @@
         <file>qml/main.qml</file>
         <file>qml/components/Header.qml</file>
         <file>qml/components/StatusLed.qml</file>
-        <file>qml/components/ActionButton.qml</file>
-        <file>qml/components/PowerIndicator.qml</file>
-        <file>qml/components/ModeSelector.qml</file>
         <file>qml/components/ThreeStateSwitch.qml</file>
         <file>qml/components/ISUPanel.qml</file>
     </qresource>

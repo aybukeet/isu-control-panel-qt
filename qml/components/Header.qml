@@ -5,9 +5,15 @@ import QtQuick.Layouts 1.15
 Rectangle {
     id: root
 
-    color: "#1F232A"
+    Layout.fillWidth: true
+    implicitHeight: 80
+
+    color: "#232830"
+
+    border.color: "#3A404B"
+    border.width: 1
+
     radius: 10
-    height: 80
 
     property string currentTime: Qt.formatTime(new Date(), "HH:mm:ss")
     property string currentDate: Qt.formatDate(new Date(), "dd MMM yyyy")
@@ -24,25 +30,30 @@ Rectangle {
     }
 
     RowLayout {
+
         anchors.fill: parent
+
         anchors.leftMargin: 25
         anchors.rightMargin: 25
 
-        spacing: 20
-
         ColumnLayout {
 
+            spacing: 2
+
             Label {
+
                 text: "ISU CONTROL PANEL"
 
                 color: "white"
 
-                font.pixelSize: 30
+                font.pixelSize: 28
+
                 font.bold: true
             }
 
             Label {
-                text: "Industrial System Unit"
+
+                text: "Industrial Switching Unit"
 
                 color: "#9AA4B2"
 
@@ -52,10 +63,14 @@ Rectangle {
         }
 
         Item {
+
             Layout.fillWidth: true
+
         }
 
         ColumnLayout {
+
+            spacing: 2
 
             Label {
 
@@ -63,10 +78,9 @@ Rectangle {
 
                 color: "#C9D1D9"
 
-                font.pixelSize: 14
+                font.pixelSize: 13
 
                 horizontalAlignment: Text.AlignRight
-
             }
 
             Label {
@@ -80,9 +94,10 @@ Rectangle {
                 font.bold: true
 
                 horizontalAlignment: Text.AlignRight
-
             }
 
         }
+
     }
+
 }

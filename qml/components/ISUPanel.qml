@@ -4,32 +4,36 @@ import QtQuick.Layouts 1.15
 
 Rectangle {
 
+    id: root
+
     property string title: "ISU"
 
     radius: 10
 
-    color: "#2B2F36"
+    color: "#2A2F36"
 
-    border.color: "#434B57"
+    border.color: "#404854"
     border.width: 1
 
     ColumnLayout {
 
         anchors.fill: parent
-        anchors.margins: 15
-        spacing: 15
+        anchors.margins: 18
+        spacing: 14
 
-        // Başlık
+        // HEADER
         RowLayout {
 
             Layout.fillWidth: true
 
             Label {
-                text: title
+
+                text: root.title
 
                 color: "white"
 
                 font.pixelSize: 22
+
                 font.bold: true
             }
 
@@ -38,66 +42,125 @@ Rectangle {
             }
 
             StatusLed {
+
                 status: "Offline"
             }
+
         }
 
-        // Güç Durumu
-        PowerIndicator {
-            powerOn: false
-        }
-
-        // Mod
-        ModeSelector {
-            Layout.fillWidth: true
-        }
-
-        // Butonlar
-        RowLayout {
+        Rectangle{
 
             Layout.fillWidth: true
-            spacing: 8
+            height:1
 
-            ActionButton {
-                Layout.fillWidth: true
+            color:"#404854"
+        }
 
-                text: "Connect"
-                iconText: "🟢"
+        // POWER
 
-                buttonColor: "#2E7D32"
+        RowLayout{
+
+            spacing:8
+
+            Label{
+
+                text:"⚡"
+
+                font.pixelSize:18
             }
 
-            ActionButton {
-                Layout.fillWidth: true
+            Label{
 
-                text: "Disconnect"
-                iconText: "🔴"
+                text:"Power"
 
-                buttonColor: "#C62828"
+                color:"#D6D6D6"
+
+                font.bold:true
             }
 
-            ActionButton {
-                Layout.fillWidth: true
+            Item{
+                Layout.fillWidth:true
+            }
 
-                text: "Power"
-                iconText: "⚡"
+            Label{
 
-                buttonColor: "#1565C0"
+                text:"OFF"
+
+                color:"#F44336"
+
+                font.bold:true
             }
 
         }
 
-        // Switch
+        // MODE
 
-        ThreeStateSwitch {
+        ColumnLayout{
 
-            Layout.fillWidth: true
+            spacing:5
+
+            Label{
+
+                text:"Mode"
+
+                color:"#D6D6D6"
+
+                font.bold:true
+            }
+
+            ComboBox{
+
+                Layout.fillWidth:true
+
+                model:[
+                    "Normal",
+                    "Test",
+                    "Maintenance"
+                ]
+            }
 
         }
 
-        Item {
+        // BUTTONS
 
-            Layout.fillHeight: true
+        RowLayout{
+
+            Layout.fillWidth:true
+
+            spacing:8
+
+            Button{
+
+                Layout.fillWidth:true
+
+                text:"🔌 Connect"
+            }
+
+            Button{
+
+                Layout.fillWidth:true
+
+                text:"⛔ Disconnect"
+            }
+
+            Button{
+
+                Layout.fillWidth:true
+
+                text:"⚡ Power"
+            }
+
+        }
+
+        ThreeStateSwitch{
+
+            Layout.fillWidth:true
+
+        }
+
+        Item{
+
+            Layout.fillHeight:true
 
         }
 
