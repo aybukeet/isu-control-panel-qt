@@ -60,6 +60,7 @@ ApplicationWindow {
                     Layout.preferredHeight: 320
 
                     title: "ISU A-1"
+                    isuId: 0
 
                     onLogRequested: {
 
@@ -80,6 +81,7 @@ ApplicationWindow {
                     Layout.preferredHeight: 320
 
                     title: "ISU A-2"
+                    isuId: 1
 
                     onLogRequested: {
 
@@ -100,6 +102,7 @@ ApplicationWindow {
                     Layout.preferredHeight: 320
 
                     title: "ISU B-1"
+                    isuId: 2
 
                     onLogRequested: {
 
@@ -120,6 +123,7 @@ ApplicationWindow {
                     Layout.preferredHeight: 320
 
                     title: "ISU B-2"
+                    isuId: 3
 
                     onLogRequested: {
 

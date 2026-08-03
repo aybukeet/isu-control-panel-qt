@@ -7,6 +7,7 @@ Rectangle {
     id: root
 
     property string title: "ISU"
+    property int isuId: 0
 
     property bool connected: false
     property bool powered: false
@@ -16,7 +17,6 @@ Rectangle {
     signal logRequested(string level, string message)
 
     radius: 10
-
     color: "#2A2F36"
 
     border.color: "#404854"
@@ -27,6 +27,8 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 18
         spacing: 14
+
+        // HEADER
 
         RowLayout {
 
@@ -44,9 +46,25 @@ Rectangle {
             }
 
             StatusLed {
-                status: root.connected ? "Ready" : "Offline"
-            }
 
+                status: {
+
+                    if (root.killed)
+                        return "Emergency"
+
+                    if (!root.connected)
+                        return "Offline"
+
+                    if (root.powered)
+                        return "Powered"
+
+                    if (root.switchState === "ON")
+                        return "Ready"
+
+                    return "Standby"
+                }
+
+            }
         }
 
         Rectangle {
@@ -54,6 +72,8 @@ Rectangle {
             height: 1
             color: "#404854"
         }
+
+        // POWER
 
         RowLayout {
 
@@ -79,13 +99,13 @@ Rectangle {
                 color: root.powered ? "#4CAF50" : "#F44336"
                 font.bold: true
             }
-
         }
+
+        // MODE
 
         ColumnLayout {
 
             Layout.fillWidth: true
-
             spacing: 5
 
             Label {
@@ -104,14 +124,27 @@ Rectangle {
                     "Maintenance"
                 ]
 
-            }
+                onActivated: {
 
+                    logRequested(
+                        "INFO",
+                        root.title + " Mode changed to " + currentText
+                    )
+
+                    uiCollector.modeRequest(
+                        root.isuId,
+                        currentIndex
+                    )
+
+                }
+            }
         }
+
+        // BUTTONS
 
         RowLayout {
 
             Layout.fillWidth: true
-
             spacing: 8
 
             Button {
@@ -125,11 +158,15 @@ Rectangle {
                 onClicked: {
 
                     root.connected = true
+                    root.switchState = "OFF"
 
-                    logRequested("INFO", root.title + " Connected")
+                    logRequested(
+                        "INFO",
+                        root.title + " Connected"
+                    )
 
+                    uiCollector.connectRequest(root.isuId)
                 }
-
             }
 
             Button {
@@ -144,11 +181,15 @@ Rectangle {
 
                     root.connected = false
                     root.powered = false
+                    root.switchState = "OFF"
 
-                    logRequested("INFO", root.title + " Disconnected")
+                    logRequested(
+                        "INFO",
+                        root.title + " Disconnected"
+                    )
 
+                    uiCollector.disconnectRequest(root.isuId)
                 }
-
             }
 
             Button {
@@ -157,7 +198,9 @@ Rectangle {
 
                 text: "⚡ Power"
 
-                enabled: root.connected && !root.killed
+                enabled: root.connected
+                         && root.switchState === "ON"
+                         && !root.killed
 
                 onClicked: {
 
@@ -165,13 +208,17 @@ Rectangle {
 
                     logRequested(
                         "INFO",
-                        root.title + (root.powered ? " Power ON" : " Power OFF")
+                        root.title + (root.powered
+                                      ? " Power Enabled"
+                                      : " Power Disabled")
                     )
 
+                    uiCollector.powerRequest(root.isuId)
                 }
             }
-
         }
+
+        // SWITCH
 
         ThreeStateSwitch {
 
@@ -183,7 +230,31 @@ Rectangle {
 
                 root.switchState = state
 
-                if (state === "KILL") {
+                if (state === "ON") {
+
+                    logRequested(
+                        "INFO",
+                        root.title + " Switch ON"
+                    )
+
+                    uiCollector.switchOnRequest(root.isuId)
+                }
+
+                else if (state === "OFF") {
+
+                    root.killed = false
+
+                    root.powered = false
+
+                    logRequested(
+                        "INFO",
+                        root.title + " Switch OFF"
+                    )
+
+                    uiCollector.switchOffRequest(root.isuId)
+                }
+
+                else if (state === "KILL") {
 
                     root.killed = true
                     root.connected = false
@@ -194,14 +265,10 @@ Rectangle {
                         root.title + " Emergency Stop Activated"
                     )
 
-                } else {
-
-                    root.killed = false
-
+                    uiCollector.killRequest(root.isuId)
                 }
 
             }
-
         }
 
         Label {
@@ -215,13 +282,10 @@ Rectangle {
             font.bold: true
 
             Layout.alignment: Qt.AlignHCenter
-
         }
 
         Item {
             Layout.fillHeight: true
         }
-
     }
-
 }

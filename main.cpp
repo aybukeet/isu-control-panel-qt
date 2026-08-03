@@ -3,6 +3,10 @@
 
 #include <QLocale>
 #include <QTranslator>
+#include <QQmlContext>
+
+#include "backend/collector/UICollector.h"
+#include "backend/dispatcher/Dispatcher.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,8 +25,25 @@ int main(int argc, char *argv[])
         }
     }
 
+    UICollector collector;
+    Dispatcher dispatcher;
+
+    QObject::connect(
+        &collector,
+        &UICollector::messageCollected,
+        &dispatcher,
+        &Dispatcher::dispatch
+        );
+
     QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextProperty(
+        "uiCollector",
+        &collector
+        );
+
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreated,
@@ -32,7 +53,8 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
+
     engine.load(url);
 
-    return QGuiApplication::exec();
+    return app.exec();
 }

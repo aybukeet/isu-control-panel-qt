@@ -49,8 +49,11 @@ GroupBox {
 
             onClicked: {
 
-                if(root.state !== "KILL")
+                if (root.state !== "KILL") {
+
                     root.state = "OFF"
+
+                }
 
             }
 
@@ -83,8 +86,11 @@ GroupBox {
 
             onClicked: {
 
-                if(root.state !== "KILL")
+                if (root.state !== "KILL") {
+
                     root.state = "ON"
+
+                }
 
             }
 

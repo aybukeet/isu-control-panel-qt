@@ -18,20 +18,28 @@ RowLayout {
         radius: width / 2
 
         color: {
-            switch(root.status) {
+
+            switch (root.status) {
+
             case "Ready":
                 return "#4CAF50"
-            case "Fault":
+
+            case "Standby":
+                return "#FFC107"
+
+            case "Powered":
+                return "#2196F3"
+
+            case "Emergency":
                 return "#F44336"
-            case "Warning":
-                return "#FF9800"
+
             default:
                 return "#7A7A7A"
             }
         }
 
         border.width: 1
-        border.color: Qt.darker(color,1.3)
+        border.color: Qt.darker(color, 1.3)
     }
 
     Label {
