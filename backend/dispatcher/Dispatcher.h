@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include "../message/UIMessage.h"
+#include "../controller/ISUController.h"
 
 class Dispatcher : public QObject
 {
@@ -12,10 +13,15 @@ class Dispatcher : public QObject
 public:
     explicit Dispatcher(QObject *parent = nullptr);
 
+    void setController(ISUController *controller);
+
 public slots:
 
     void dispatch(const UIMessage &message);
 
+private:
+
+    ISUController *m_controller = nullptr;
 };
 
 #endif // DISPATCHER_H

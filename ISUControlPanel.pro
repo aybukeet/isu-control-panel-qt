@@ -6,6 +6,7 @@ QT += quick
 
 SOURCES += \
         backend/collector/UICollector.cpp \
+        backend/controller/ISUController.cpp \
         backend/dispatcher/Dispatcher.cpp \
         main.cpp
 
@@ -29,6 +30,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     backend/collector/UICollector.h \
+    backend/controller/ISUController.h \
     backend/dispatcher/Dispatcher.h \
     backend/enums/CommandType.h \
     backend/enums/ISUType.h \

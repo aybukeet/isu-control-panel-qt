@@ -7,6 +7,7 @@
 
 #include "backend/collector/UICollector.h"
 #include "backend/dispatcher/Dispatcher.h"
+#include "backend/controller/ISUController.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,6 +28,7 @@ int main(int argc, char *argv[])
 
     UICollector collector;
     Dispatcher dispatcher;
+    ISUController controller;
 
     QObject::connect(
         &collector,
@@ -34,6 +36,8 @@ int main(int argc, char *argv[])
         &dispatcher,
         &Dispatcher::dispatch
         );
+
+    dispatcher.setController(&controller);
 
     QQmlApplicationEngine engine;
 
