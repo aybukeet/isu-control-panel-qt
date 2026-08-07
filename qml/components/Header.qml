@@ -42,7 +42,7 @@ Rectangle {
 
             Label {
 
-                text: "ISU CONTROL PANEL"
+                text: "ECU CONTROL PANEL"
 
                 color: "white"
 
@@ -53,7 +53,7 @@ Rectangle {
 
             Label {
 
-                text: "Industrial Switching Unit"
+                text: "Electronic Control Unit Management"
 
                 color: "#9AA4B2"
 

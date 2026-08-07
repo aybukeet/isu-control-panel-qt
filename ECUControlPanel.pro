@@ -1,19 +1,18 @@
 QT += quick
-
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
         backend/collector/UICollector.cpp \
-        backend/controller/ISUController.cpp \
+        backend/controller/ECUController.cpp \
         backend/dispatcher/Dispatcher.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
 
 TRANSLATIONS += \
-    ISUControlPanel_tr_TR.ts
+    ECUControlPanel_tr_TR.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 
@@ -30,12 +29,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     backend/collector/UICollector.h \
-    backend/controller/ISUController.h \
+    backend/controller/ECUController.h \
     backend/dispatcher/Dispatcher.h \
     backend/enums/CommandType.h \
-    backend/enums/ISUType.h \
+    backend/enums/ECUType.h \
     backend/enums/ModeType.h \
     backend/message/UIMessage.h
 
 DISTFILES += \
-    docs/ISU_State_Machine.md
+    docs/ECU_State_Machine.md

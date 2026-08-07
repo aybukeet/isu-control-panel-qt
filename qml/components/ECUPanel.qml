@@ -6,8 +6,8 @@ Rectangle {
 
     id: root
 
-    property string title: "ISU"
-    property int isuId: 0
+    property string title: "ECU"
+    property int ecuId: 0
 
     property bool connected: false
     property bool powered: false
@@ -132,7 +132,7 @@ Rectangle {
                     )
 
                     uiCollector.modeRequest(
-                        root.isuId,
+                        root.ecuId,
                         currentIndex
                     )
 
@@ -165,7 +165,7 @@ Rectangle {
                         root.title + " Connected"
                     )
 
-                    uiCollector.connectRequest(root.isuId)
+                    uiCollector.connectRequest(root.ecuId)
                 }
             }
 
@@ -188,7 +188,7 @@ Rectangle {
                         root.title + " Disconnected"
                     )
 
-                    uiCollector.disconnectRequest(root.isuId)
+                    uiCollector.disconnectRequest(root.ecuId)
                 }
             }
 
@@ -213,7 +213,7 @@ Rectangle {
                                       : " Power Disabled")
                     )
 
-                    uiCollector.powerRequest(root.isuId)
+                    uiCollector.powerRequest(root.ecuId)
                 }
             }
         }
@@ -237,7 +237,7 @@ Rectangle {
                         root.title + " Switch ON"
                     )
 
-                    uiCollector.switchOnRequest(root.isuId)
+                    uiCollector.switchOnRequest(root.ecuId)
                 }
 
                 else if (state === "OFF") {
@@ -251,7 +251,7 @@ Rectangle {
                         root.title + " Switch OFF"
                     )
 
-                    uiCollector.switchOffRequest(root.isuId)
+                    uiCollector.switchOffRequest(root.ecuId)
                 }
 
                 else if (state === "KILL") {
@@ -265,7 +265,7 @@ Rectangle {
                         root.title + " Emergency Stop Activated"
                     )
 
-                    uiCollector.killRequest(root.isuId)
+                    uiCollector.killRequest(root.ecuId)
                 }
 
             }

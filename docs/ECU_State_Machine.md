@@ -1,4 +1,4 @@
-# ISU Control Panel - State Machine
+# ECU Control Panel - State Machine
 
 ## Overview
 
@@ -12,7 +12,7 @@ The purpose is to establish a clear software behavior before implementing the co
 
 | State | Description |
 |--------|-------------|
-| Offline | No communication with the ISU. |
+| Offline | No communication with the ECU. |
 | Standby | Connected but waiting for operation. |
 | Ready | Connected and switch is ON. System is ready to operate. |
 | Powered | Output power is enabled. |
@@ -40,7 +40,7 @@ The purpose is to establish a clear software behavior before implementing the co
 
 ### Connect
 
-- Establishes communication with the ISU.
+- Establishes communication with the ECU.
 - Does **not** enable power.
 - Default state after connection is **Standby**.
 
@@ -74,7 +74,7 @@ The purpose is to establish a clear software behavior before implementing the co
 ### Power ON
 
 - Only allowed while in Ready state.
-- Enables ISU output power.
+- Enables ECU output power.
 - State becomes **Powered**.
 
 ---
@@ -107,6 +107,6 @@ The following components will implement this behavior:
 
 - UICollector
 - Dispatcher
-- ISUController
+- ECUController
 - CAN Connector
 - CAN Receiver

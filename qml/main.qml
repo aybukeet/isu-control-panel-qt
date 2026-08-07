@@ -21,7 +21,7 @@ ApplicationWindow {
     minimumWidth: 1200
     minimumHeight: 700
 
-    title: "ISU Control Panel"
+    title: "ECU Control Panel"
 
 
     Rectangle {
@@ -54,13 +54,13 @@ ApplicationWindow {
                 rowSpacing: 15
                 columnSpacing: 15
 
-                ISUPanel {
+                ECUPanel {
 
                     Layout.fillWidth: true
                     Layout.preferredHeight: 320
 
-                    title: "ISU A-1"
-                    isuId: 0
+                    title: "ECU A-1"
+                    ecuId: 0
 
                     onLogRequested: {
 
@@ -75,13 +75,13 @@ ApplicationWindow {
 
                 }
 
-                ISUPanel {
+                ECUPanel {
 
                     Layout.fillWidth: true
                     Layout.preferredHeight: 320
 
-                    title: "ISU A-2"
-                    isuId: 1
+                    title: "ECU A-2"
+                    ecuId: 1
 
                     onLogRequested: {
 
@@ -96,13 +96,13 @@ ApplicationWindow {
 
                 }
 
-                ISUPanel {
+                ECUPanel {
 
                     Layout.fillWidth: true
                     Layout.preferredHeight: 320
 
-                    title: "ISU B-1"
-                    isuId: 2
+                    title: "ECU B-1"
+                    ecuId: 2
 
                     onLogRequested: {
 
@@ -117,13 +117,13 @@ ApplicationWindow {
 
                 }
 
-                ISUPanel {
+                ECUPanel {
 
                     Layout.fillWidth: true
                     Layout.preferredHeight: 320
 
-                    title: "ISU B-2"
-                    isuId: 3
+                    title: "ECU B-2"
+                    ecuId: 3
 
                     onLogRequested: {
 

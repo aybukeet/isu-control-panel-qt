@@ -21,7 +21,7 @@ void Dispatcher::dispatch(const UIMessage &message)
     m_controller->handleMessage(message);
 }
 
-void Dispatcher::setController(ISUController *controller)
+void Dispatcher::setController(ECUController *controller)
 {
     m_controller = controller;
 }

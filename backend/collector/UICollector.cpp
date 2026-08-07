@@ -7,23 +7,23 @@ UICollector::UICollector(QObject *parent)
 {
 }
 
-ISUType UICollector::toISUType(int isu)
+ECUType UICollector::toECUType(int ecu)
 {
-    switch (isu)
+    switch (ecu)
     {
-    case 0: return ISUType::A1;
-    case 1: return ISUType::A2;
-    case 2: return ISUType::B1;
-    case 3: return ISUType::B2;
-    default: return ISUType::A1;
+    case 0: return ECUType::A1;
+    case 1: return ECUType::A2;
+    case 2: return ECUType::B1;
+    case 3: return ECUType::B2;
+    default: return ECUType::A1;
     }
 }
 
-void UICollector::connectRequest(int isu)
+void UICollector::connectRequest(int ecu)
 {
     UIMessage message;
 
-    message.isu = toISUType(isu);
+    message.ecu = toECUType(ecu);
     message.command = CommandType::Connect;
     message.mode = ModeType::Normal;
 
@@ -32,11 +32,11 @@ void UICollector::connectRequest(int isu)
     emit messageCollected(message);
 }
 
-void UICollector::disconnectRequest(int isu)
+void UICollector::disconnectRequest(int ecu)
 {
     UIMessage message;
 
-    message.isu = toISUType(isu);
+    message.ecu = toECUType(ecu);
     message.command = CommandType::Disconnect;
     message.mode = ModeType::Normal;
 
@@ -45,11 +45,11 @@ void UICollector::disconnectRequest(int isu)
     emit messageCollected(message);
 }
 
-void UICollector::powerRequest(int isu)
+void UICollector::powerRequest(int ecu)
 {
     UIMessage message;
 
-    message.isu = toISUType(isu);
+    message.ecu = toECUType(ecu);
     message.command = CommandType::Power;
     message.mode = ModeType::Normal;
 
@@ -58,11 +58,11 @@ void UICollector::powerRequest(int isu)
     emit messageCollected(message);
 }
 
-void UICollector::killRequest(int isu)
+void UICollector::killRequest(int ecu)
 {
     UIMessage message;
 
-    message.isu = toISUType(isu);
+    message.ecu = toECUType(ecu);
     message.command = CommandType::Kill;
     message.mode = ModeType::Normal;
 
@@ -71,11 +71,11 @@ void UICollector::killRequest(int isu)
     emit messageCollected(message);
 }
 
-void UICollector::modeRequest(int isu, int mode)
+void UICollector::modeRequest(int ecu, int mode)
 {
     UIMessage message;
 
-    message.isu = toISUType(isu);
+    message.ecu = toECUType(ecu);
     message.command = CommandType::ChangeMode;
 
     switch (mode)
@@ -102,11 +102,11 @@ void UICollector::modeRequest(int isu, int mode)
     emit messageCollected(message);
 }
 
-void UICollector::switchOnRequest(int isu)
+void UICollector::switchOnRequest(int ecu)
 {
     UIMessage message;
 
-    message.isu = toISUType(isu);
+    message.ecu = toECUType(ecu);
     message.command = CommandType::SwitchOn;
     message.mode = ModeType::Normal;
 
@@ -115,11 +115,11 @@ void UICollector::switchOnRequest(int isu)
     emit messageCollected(message);
 }
 
-void UICollector::switchOffRequest(int isu)
+void UICollector::switchOffRequest(int ecu)
 {
     UIMessage message;
 
-    message.isu = toISUType(isu);
+    message.ecu = toECUType(ecu);
     message.command = CommandType::SwitchOff;
     message.mode = ModeType::Normal;
 

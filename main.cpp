@@ -7,7 +7,7 @@
 
 #include "backend/collector/UICollector.h"
 #include "backend/dispatcher/Dispatcher.h"
-#include "backend/controller/ISUController.h"
+#include "backend/controller/ECUController.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
-        const QString baseName = "ISUControlPanel_" + QLocale(locale).name();
+        const QString baseName = "ECUControlPanel_" + QLocale(locale).name();
         if (translator.load(":/i18n/" + baseName)) {
             app.installTranslator(&translator);
             break;
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     UICollector collector;
     Dispatcher dispatcher;
-    ISUController controller;
+    ECUController controller;
 
     QObject::connect(
         &collector,

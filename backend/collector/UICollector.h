@@ -12,19 +12,19 @@ class UICollector : public QObject
 public:
     explicit UICollector(QObject *parent = nullptr);
 
-    Q_INVOKABLE void connectRequest(int isu);
-    Q_INVOKABLE void disconnectRequest(int isu);
-    Q_INVOKABLE void powerRequest(int isu);
-    Q_INVOKABLE void killRequest(int isu);
-    Q_INVOKABLE void modeRequest(int isu, int mode);
-    Q_INVOKABLE void switchOnRequest(int isu);
-    Q_INVOKABLE void switchOffRequest(int isu);
+    Q_INVOKABLE void connectRequest(int ecu);
+    Q_INVOKABLE void disconnectRequest(int ecu);
+    Q_INVOKABLE void powerRequest(int ecu);
+    Q_INVOKABLE void killRequest(int ecu);
+    Q_INVOKABLE void modeRequest(int ecu, int mode);
+    Q_INVOKABLE void switchOnRequest(int ecu);
+    Q_INVOKABLE void switchOffRequest(int ecu);
 
 signals:
     void messageCollected(const UIMessage &message);
 
 private:
-    ISUType toISUType(int isu);
+    ECUType toECUType(int ecu);
 };
 
 #endif // UICOLLECTOR_H
